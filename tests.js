@@ -73,7 +73,7 @@ testCase('check that id of post is unique', function () {
 });
 
 
-testCase('/GET posts', function(){
+testCase('/GET posts', function () {
     it('it should GET all the posts', (done) => {
         chai.request('https://jsonplaceholder.typicode.com')
             .get('/posts?userId=1')
@@ -82,7 +82,7 @@ testCase('/GET posts', function(){
                 res.should.have.status(200);
                 res.body.length.should.have.eq(10);
                 console.log(res.body);
-                for(let i =0; i<res.body.length; i++){
+                for (let i = 0; i < res.body.length; i++) {
                     res.body[i].should.have.property("userId", 1);
                 }
                 res.body.should.be.a('array');
@@ -91,7 +91,7 @@ testCase('/GET posts', function(){
     });
 });
 
-testCase('/GET posts', function(){
+testCase('/GET posts', function () {
     it('it should GET all the posts', (done) => {
         chai.request('https://jsonplaceholder.typicode.com')
             .get('/posts?userId=9999999999999999')
@@ -99,12 +99,12 @@ testCase('/GET posts', function(){
                 console.log("body: " + res.body.length)
                 console.log(err);
                 res.should.have.status(200);
-                // res.body.length.should.have.eq(10);
-                // console.log(res.body);
-                // for(let i =0; i<res.body.length; i++){
-                //     res.body[i].should.have.property("userId", 1);
-                // }
-                // res.body.should.be.a('array');
+                res.body.length.should.have.eq(10);
+                console.log(res.body);
+                for (let i = 0; i < res.body.length; i++) {
+                    res.body[i].should.have.property("userId", 1);
+                }
+                res.body.should.be.a('array');
                 done();
             });
     });
