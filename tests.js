@@ -16,7 +16,7 @@ You can refer to the website for the API documentation and examples.
 
 // test format of reponse
 testCase('check format of response for posts', function () {
-    it('it should GET all the posts', (done) => {
+    it('format of response is {userId:, id:, title:, body:}', (done) => {
         chai.request('https://jsonplaceholder.typicode.com')
             .get('/posts?userId=1')
             .end((err, res) => {
@@ -52,7 +52,7 @@ testCase('check that body and title is not empty', function () {
 
 
 testCase('check that id of post is unique', function () {
-    it('it should GET all the posts', (done) => {
+    it('id of the post is unique', (done) => {
         let setOfPostsId = new Set();
         let amountOfPosts;
         let sizeOfUniquePosts;
@@ -73,8 +73,8 @@ testCase('check that id of post is unique', function () {
 });
 
 
-testCase('/GET posts', function () {
-    it('it should GET all the posts', (done) => {
+testCase('all userId have the same userId', function () {
+    it('it should have an a userId', (done) => {
         chai.request('https://jsonplaceholder.typicode.com')
             .get('/posts?userId=1')
             .end((err, res) => {
@@ -91,21 +91,3 @@ testCase('/GET posts', function () {
     });
 });
 
-testCase('/GET posts', function () {
-    it('it should GET all the posts', (done) => {
-        chai.request('https://jsonplaceholder.typicode.com')
-            .get('/posts?userId=9999999999999999')
-            .end((err, res) => {
-                console.log("body: " + res.body.length)
-                console.log(err);
-                res.should.have.status(200);
-                res.body.length.should.have.eq(10);
-                console.log(res.body);
-                for (let i = 0; i < res.body.length; i++) {
-                    res.body[i].should.have.property("userId", 1);
-                }
-                res.body.should.be.a('array');
-                done();
-            });
-    });
-});
