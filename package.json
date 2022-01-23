@@ -1,0 +1,12 @@
+{
+  "name": "APITestingTask",
+  "version": "1.0.0",
+  "description": "REST API tests for sample website",
+  "main": "tests.js",
+  "author": "Maria Spirina",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
+  }
+}
