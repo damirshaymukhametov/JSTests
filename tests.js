@@ -91,3 +91,60 @@ testCase('all userId have the same userId', function () {
     });
 });
 
+testCase('empty title', function () {
+    it('it should have return 0 records', (done) => {
+        chai.request('https://jsonplaceholder.typicode.com')
+            .get('/posts?userId=1&title=')
+            .end((err, res) => {
+                console.log("body: " + res.body.length)
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.length.should.have.eq(0);
+                console.log(res.body);
+                done();
+            });
+    });
+});
+
+testCase('get record by userId and title', function () {
+    it('it should have return 1 record', (done) => {
+        chai.request('https://jsonplaceholder.typicode.com')
+            .get('/posts?userId=1&title=qui est esse')
+            .end((err, res) => {
+                console.log("body: " + res.body.length)
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.length.should.have.eq(1);
+                console.log(res.body);
+                done();
+            });
+    });
+});
+testCase('get record by userID and white space before title', function () {
+    it('it should have return one record', (done) => {
+        chai.request('https://jsonplaceholder.typicode.com')
+            .get('/posts?userId=1&title=       qui est esse')
+            .end((err, res) => {
+                console.log("body: " + res.body.length)
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.length.should.have.eq(1);
+                console.log(res.body);
+                done();
+            });
+    });
+});
+testCase('get record by userId and substring of title', function () {
+    it('it should have return all records where title that have substring', (done) => {
+        chai.request('https://jsonplaceholder.typicode.com')
+            .get('/posts?userId=1&title=qui est')
+            .end((err, res) => {
+                console.log("body: " + res.body.length)
+                res.should.have.status(200);
+                res.body.should.be.a('array');
+                res.body.length.should.have.eq(1);
+                console.log(res.body);
+                done();
+            });
+    });
+});
